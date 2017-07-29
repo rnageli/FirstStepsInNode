@@ -1,18 +1,9 @@
-console.log('Revising node js tutorial');
+console.log('Writing to a file test');
 
-//const fs = require('fs');
-//const os = require('os');
+const fs = require('fs');
 const yargs = require('yargs');
 //First node system requires, then npm modules and then local. Use a line break;
 const notes = require('./notes.js');//Note will execute notes.js console log
-
-//Using command line arguments
-var command = process.argv;//NOte arguments are stored in process object
-//First argument is node and second is app.js in this case
-console.log('command line argument'+command[2]);
-//WHere command line struggles
-console.log('Will need to parse in order to fetch key value pairs',command[3]);
-//const _ = require('lodash');
 
 //Using yargs
 var yarg = yargs.argv;

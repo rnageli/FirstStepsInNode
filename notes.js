@@ -1,8 +1,27 @@
-console.log('Own file which is required in app.js');
 
+const fs = require('fs');
 
 var AddNote = (title, body) => {
-  console.log('Adding note with title ',title,' and body ',body);
+  var notes = [];
+  var note ={//just like the way we did for modules export.
+    title,
+    body
+  };
+  try{
+    //if the app is run when the file doesn't exist
+      notes = JSON.parse(fs.readFileSync("notes-node.json"));
+  }catch(e){
+
+  }
+  //this is a ES6 feature to remove curly braces for one lined statements for arrow functions
+  var duplicateTitles = notes.filter((note) => note.title === title);
+  //filter is array method that uses a call back.
+  // the above line is same as the below function
+  //var duplicateTitles = notes.filer((note) => {note.title === title});
+  if(duplicateTitles.length === 0){
+    notes.push(note);
+    fs.writeFileSync("notes-node.json",JSON.stringify(notes));
+  }
 }
 
 var getAllNotes = () => {
