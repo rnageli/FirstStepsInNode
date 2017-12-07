@@ -10,14 +10,23 @@ console.log('yargs commands ', yarg);
 console.log('yargs first command ',yarg._[0]);
 console.log('key value pair: ',yarg.title);
 
-if(yarg._[0]=='add'){
+var command = yarg._[0];
+if(command ==='add'){
   notes.add(yarg.title,yarg.body);
-}else if(yarg._[0]=='list'){
+}else if(command==='list'){
   var allNotes=notes.list();
   if(allNotes){
     console.log('found these notes', JSON.stringify(allNotes));
   }
-}else if(yarg._[0]=='delete'){
+}else if(command==='delete'){
   var msg=notes.delete(yarg.title);//node app.js delete --title="third note"
   console.log(msg);
+}else if(command==='read'){
+  var msg=notes.read(yarg.title);
+  if(msg){
+    console.log(`Reading note: ${msg.title}`);//ES 6 feature to embed objects into string
+    console.log(`Note content: ${msg.body}`);
+  }else{
+    console.log('Note '+yarg.title+' doesnt exist');
+  }
 }

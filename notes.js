@@ -10,7 +10,7 @@ var AddNote = (title, body) => {
   //
   try{
     //if the app is run when the file doesn't exist
-      notes = JSON.parse(fs.readFileSync("notes-node.json"));
+      notes = getAllNotes();
   }catch(e){
 
   }
@@ -30,7 +30,7 @@ var getAllNotes = () => {
   try{
     notes = JSON.parse(fs.readFileSync("notes-node.json"));
   }catch(e){
-
+    console.log('File not found');
   }
     return notes;
 }
@@ -38,7 +38,7 @@ var getAllNotes = () => {
 var deleteNote = (title) => {
     var notes;
     try{
-      notes = JSON.parse(fs.readFileSync("notes-node.json"));
+      notes = getAllNotes();
     }catch(e){
       return 'unable to read file notes-node';
     }
@@ -50,6 +50,20 @@ var deleteNote = (title) => {
       return 'Did not find note';
     }
 }
+
+var getNote = (title) =>{
+  var notes;
+  try{
+    notes= getAllNotes();
+  }catch(e){
+    console.log('did not find file');
+    return;
+  }
+  var readNote = notes.filter((note)=>note.title===title);
+  if(readNote){
+    return readNote[0];
+  }else return;
+}
 //when the name value pair naming is the same
 // module.exports ={
 //   AddNote,
@@ -60,5 +74,6 @@ var deleteNote = (title) => {
 module.exports ={
   add: AddNote,
   list: getAllNotes,
-  delete: deleteNote
+  delete: deleteNote,
+  read:getNote
 };
