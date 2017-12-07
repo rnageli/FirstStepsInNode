@@ -1,4 +1,3 @@
-console.log('Writing to a file test');
 
 const fs = require('fs');
 const yargs = require('yargs');
@@ -14,5 +13,11 @@ console.log('key value pair: ',yarg.title);
 if(yarg._[0]=='add'){
   notes.add(yarg.title,yarg.body);
 }else if(yarg._[0]=='list'){
-  notes.list();
+  var allNotes=notes.list();
+  if(allNotes){
+    console.log('found these notes', JSON.stringify(allNotes));
+  }
+}else if(yarg._[0]=='delete'){
+  var msg=notes.delete(yarg.title);//node app.js delete --title="third note"
+  console.log(msg);
 }

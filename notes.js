@@ -7,6 +7,7 @@ var AddNote = (title, body) => {
     title,
     body
   };
+  //
   try{
     //if the app is run when the file doesn't exist
       notes = JSON.parse(fs.readFileSync("notes-node.json"));
@@ -25,7 +26,29 @@ var AddNote = (title, body) => {
 }
 
 var getAllNotes = () => {
-  console.log('Will add code here to get all notes');
+  var notes;
+  try{
+    notes = JSON.parse(fs.readFileSync("notes-node.json"));
+  }catch(e){
+
+  }
+    return notes;
+}
+
+var deleteNote = (title) => {
+    var notes;
+    try{
+      notes = JSON.parse(fs.readFileSync("notes-node.json"));
+    }catch(e){
+      return 'unable to read file notes-node';
+    }
+    var notesToKeep = notes.filter((note) => note.title !== title);
+    if(notesToKeep.length < notes.length){
+      fs.writeFileSync("notes-node.json",JSON.stringify(notesToKeep));
+      return 'deleted note'+title;
+    }else{
+      return 'Did not find note';
+    }
 }
 //when the name value pair naming is the same
 // module.exports ={
@@ -36,5 +59,6 @@ var getAllNotes = () => {
 //or if the mapping to the name is different ES6
 module.exports ={
   add: AddNote,
-  list: getAllNotes
+  list: getAllNotes,
+  delete: deleteNote
 };
