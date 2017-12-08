@@ -64,6 +64,12 @@ var getNote = (title) =>{
     return readNote[0];
   }else return;
 }
+
+var printNote = (note) => {
+  console.log(`Title: ${note.title}`);
+  console.log(`Body content: ${note.body}`);
+  console.log();
+}
 //when the name value pair naming is the same
 // module.exports ={
 //   AddNote,
@@ -75,5 +81,6 @@ module.exports ={
   add: AddNote,
   list: getAllNotes,
   delete: deleteNote,
-  read:getNote
+  read:getNote,
+  print:printNote
 };
