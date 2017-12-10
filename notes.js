@@ -22,6 +22,9 @@ var AddNote = (title, body) => {
   if(duplicateTitles.length === 0){
     notes.push(note);
     fs.writeFileSync("notes-node.json",JSON.stringify(notes));
+    printNote(note);
+  }else{
+    console.log('Note already exists');
   }
 }
 
